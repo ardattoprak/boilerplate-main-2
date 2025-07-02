@@ -121,7 +121,7 @@ class ServiceNotification {
       } else {
         if (GeneralData.getInstance().getAuthToken().isNullOrEmpty() || Jwt.isExpired(GeneralData.getInstance().getAuthToken()!)) {
           if (ServiceRoute.rootRouter.current.name != 'login') {
-            ServiceRoute.rootRouter.replaceAll([ViewLoginRoute()]);
+            ServiceRoute.rootRouter.replaceAll([ViewLogin()]);
           } 
           GeneralData.getInstance().notificationLink = payload;
         } else {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/services/router.gr.dart';
@@ -15,6 +16,7 @@ import '../../../ui/views/splash/vm_splash.dart';
 import '../../../ui/widgets/widgets_text.dart';
 import '../../animations/splash_transition.dart';
 
+@RoutePage()
 class ViewSplash extends WidgetBase<VmSplash> {
   const ViewSplash({
     super.key,
@@ -68,11 +70,11 @@ class ViewSplash extends WidgetBase<VmSplash> {
             }
             if (await viewModel.handleToken()) {
               if (context.mounted) {
-                router(context).startNewView(route: ViewHomeRoute(), isReplace: true, clearStack: true);
+                router(context).startNewView(route: ViewHome(), isReplace: true, clearStack: true);
               }
             } else {
               if (context.mounted) {
-                router(context).startNewView(route: ViewLoginRoute(), isReplace: true, clearStack: true);
+                router(context).startNewView(route: ViewLogin(), isReplace: true, clearStack: true);
               }
             }
           }

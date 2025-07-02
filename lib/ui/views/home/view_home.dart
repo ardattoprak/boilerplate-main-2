@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../ui/views/home/vm_home.dart';
@@ -6,6 +7,7 @@ import '../../../core/resources/_r.dart';
 import '../../../ui/base/base_view.dart';
 import '../../../ui/widgets/widgets_text.dart';
 
+@RoutePage()
 class ViewHome extends WidgetBase<VmHome> {
   const ViewHome({
     super.key,

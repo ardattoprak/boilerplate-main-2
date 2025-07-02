@@ -4,15 +4,17 @@ import '../../ui/views/home/view_home.dart';
 import '../../ui/views/login/view_login.dart';
 import '../../ui/views/splash/view_splash.dart';
 
-@MaterialAutoRouter(
-  routes: [
-    AutoRoute(path: '/splash', page: ViewSplash),
-    CustomRoute(path: '/login', page: ViewLogin, transitionsBuilder: TransitionsBuilders.fadeIn, durationInMilliseconds: 300),
-    CustomRoute(path: '/home', page: ViewHome, transitionsBuilder: TransitionsBuilders.fadeIn, durationInMilliseconds: 300),
+
+@AutoRouterConfig()
+class AppRouter extends RootStackRouter {
+  @override
+  List<AutoRoute> get routes => [
+    AutoRoute(page: ViewSplash.page, path: '/splash', initial: true),
+    CustomRoute(page: ViewLogin.page, path: '/login', transitionsBuilder: TransitionsBuilders.fadeIn, durationInMilliseconds: 300),
+    CustomRoute(page: ViewHome.page, path: '/home', transitionsBuilder: TransitionsBuilders.fadeIn, durationInMilliseconds: 300),
     RedirectRoute(path: '*', redirectTo: '/splash'),
-  ],
-)
-class $RootRouter {}
+  ];
+}
 
 class RooterObserver extends AutoRouterObserver {
   @override

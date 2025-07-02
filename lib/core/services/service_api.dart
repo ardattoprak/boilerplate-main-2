@@ -54,7 +54,7 @@ class ServiceApi extends ChangeNotifier {
     }
   }
 
-  Future<void> onError(DioError e, ErrorInterceptorHandler handler) async {
+  Future<void> onError(DioException e, ErrorInterceptorHandler handler) async {
     e = e.copyWith(message: R.string.genericError);
     return handler.next(e);
   }
@@ -69,10 +69,12 @@ class ServiceApi extends ChangeNotifier {
     if (isSuccess) {
       return handler.next(response);
     } else {
-      DioError e = DioError(requestOptions: RequestOptions(path: ''));
+      DioException e = DioException(requestOptions: RequestOptions(path: ''));
       String? errorMessage = (response.data?['error']);
       e = e.copyWith(message: errorMessage ?? R.string.genericError);
       return handler.reject(e);
     }
   }
 }
+
+

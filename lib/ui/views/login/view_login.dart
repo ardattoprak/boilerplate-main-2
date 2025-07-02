@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../core/services/router.gr.dart';
@@ -8,6 +9,7 @@ import '../../../ui/base/base_view.dart';
 
 import 'vm_login.dart';
 
+@RoutePage()
 class ViewLogin extends WidgetBase<VmLogin> {
   const ViewLogin({
     super.key,
@@ -30,7 +32,7 @@ class ViewLogin extends WidgetBase<VmLogin> {
       onTap: () async {
         var state = await viewModel.login('username', 'password');
         if (state && context.mounted) {
-          router(context).startNewView(route: ViewHomeRoute(), isReplace: true, clearStack: true);
+          router(context).startNewView(route: ViewHome(), isReplace: true, clearStack: true);
         }
       },
       child: const Center(child: TextBasic(text: 'login')),

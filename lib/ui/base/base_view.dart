@@ -99,6 +99,6 @@ mixin BaseView {
     GeneralData.getInstance().userData = null;
     GeneralData.getInstance().setAuthToken(null);
     GeneralData.getInstance().setUsername(null);
-    router(context).startNewView(route: ViewLoginRoute(), isReplace: true, clearStack: true);
+    router(context).startNewView(route: ViewLogin(), isReplace: true, clearStack: true);
   }
 }

@@ -2,34 +2,33 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../constants/ui_brightness_style.dart';
 import 'router.dart';
-import 'router.gr.dart';
 
 class ServiceRoute extends ChangeNotifier {
   final UIBrightnessStyle uiBrightnessStyle = UIBrightnessStyle();
 
   late GlobalKey<NavigatorState> navigatorKey;
-  static late RootRouter rootRouter;
-  static late AutoRouterDelegate routerDelegate;
+  static late AppRouter appRouter;
 
   ServiceRoute() {
     navigatorKey = GlobalKey<NavigatorState>();
-    rootRouter = RootRouter(navigatorKey);
-    routerDelegate = AutoRouterDelegate(rootRouter, navigatorObservers: () => [RooterObserver()]);
+    appRouter = AppRouter();
   }
 
   void onBackPressed<T extends Object?>([T? result, ChangeNotifier? viewModel]) {
-    rootRouter.pop(result);
+    appRouter.maybePop(result);
   }
 
+  static AppRouter get rootRouter => appRouter;
+  static AutoRouterDelegate get routerDelegate => appRouter.delegate();
+
   Future<T?> startNewView<T>({required PageRouteInfo<dynamic> route, bool isReplace = false, bool clearStack = false}) async {
-    if (isReplace && clearStack) {
-      await rootRouter.replaceAll([route]);
+    if (clearStack) {
+      return await appRouter.pushAndPopUntil<T>(route, predicate: (route) => false);
     } else if (isReplace) {
-      return await rootRouter.replace<T>(route);
+      return await appRouter.replace(route);
     } else {
-      return await rootRouter.push<T>(route);
+      return await appRouter.push<T>(route);
     }
-    return null;
   }
 
   void hideKeyboard(BuildContext context) {

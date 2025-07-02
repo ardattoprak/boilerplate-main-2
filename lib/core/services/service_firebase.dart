@@ -39,7 +39,7 @@ class ServiceFirebase extends ChangeNotifier {
     }
   }
 
-  Future<void> logEvent(String name, [Map<String, dynamic>? parameters]) async {
+  Future<void> logEvent(String name, [Map<String, Object>? parameters]) async {
     await analytics.logEvent(
       name: name,
       parameters: parameters,

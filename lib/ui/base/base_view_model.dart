@@ -29,7 +29,7 @@ abstract class ViewModelBase extends ChangeNotifier {
 
   Future<void> handleApiError(dynamic error) async {
     activityState = ActivityState.isError;
-    if (error is DioError) {
+    if (error is DioException) {
       errorObserver.message = error.message ?? '';
       if (error.response != null) {
         switch (error.response!.statusCode) {
